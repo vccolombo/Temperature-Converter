@@ -1,8 +1,10 @@
 package com.github.vccolombo.temperatureconverter.ui.converter.fragment
 
+import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.github.vccolombo.temperatureconverter.model.ConverterRepository
+import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -31,9 +33,7 @@ class ConverterViewModel(private val converterRepository: ConverterRepository) :
         toUnit.value = 2
     }
 
-    fun onClickConvertButton() {
-        Timber.d("Convert button clicked")
-
+    fun onInputChanged() {
         var from: String? = null
         var to: String? = null
 

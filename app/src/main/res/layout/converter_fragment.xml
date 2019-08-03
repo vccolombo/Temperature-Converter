@@ -11,63 +11,69 @@
             android:layout_height="match_parent"
             tools:context=".ui.converter.fragment.ConverterFragment">
 
-        <com.google.android.material.textfield.TextInputLayout android:layout_width="128dp"
+        <com.google.android.material.textfield.TextInputLayout android:layout_width="200dp"
                                                                android:layout_height="wrap_content"
-                                                               android:id="@+id/editText"
-                                                               style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                                               android:layout_marginTop="64dp"
-                                                               app:layout_constraintTop_toTopOf="parent"
-                                                               app:layout_constraintEnd_toStartOf="@+id/to_spinner"
-                                                               android:layout_marginEnd="8dp"
-                                                               app:layout_constraintStart_toEndOf="@+id/from_spinner"
-                                                               android:layout_marginStart="8dp">
+                                                               app:layout_constraintStart_toStartOf="parent"
+                                                               android:layout_marginStart="16dp"
+                                                               app:layout_constraintEnd_toStartOf="@+id/to_spiner"
+                                                               android:layout_marginEnd="16dp"
+                                                               android:id="@+id/textInputLayout"
+                                                               app:layout_constraintHorizontal_bias="0.518"
+                                                               android:layout_marginTop="128dp"
+                                                               app:layout_constraintTop_toTopOf="parent">
             <com.google.android.material.textfield.TextInputEditText android:layout_width="match_parent"
-                                                                     android:layout_height="wrap_content"
+                                                                     android:layout_height="match_parent"
                                                                      android:text="@={viewModel.valueToConvert}"
-                                                                     android:inputType="numberSigned|numberDecimal"
-                                                                     android:gravity="center"/>
+                                                                     android:gravity="center_horizontal"
+                                                                     android:inputType="numberSigned|numberDecimal"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <Spinner android:layout_width="wrap_content" android:layout_height="wrap_content"
-                 android:id="@+id/from_spinner"
-                 android:entries="@array/temperature_units"
-                 android:selectedItemPosition="@={viewModel.fromUnit}"
-                 android:layout_marginTop="16dp"
-                 app:layout_constraintTop_toBottomOf="@+id/editText" android:layout_marginBottom="16dp"
-                 app:layout_constraintBottom_toTopOf="@+id/button" app:layout_constraintEnd_toStartOf="@+id/button"
-                 android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
-                 android:layout_marginStart="32dp"/>
-
-        <Spinner android:layout_width="wrap_content" android:layout_height="wrap_content"
-                 android:id="@+id/to_spinner"
+                 android:id="@+id/to_spiner"
                  android:entries="@array/temperature_units"
                  android:selectedItemPosition="@={viewModel.toUnit}"
-                 android:spinnerMode="dropdown"
-                 android:layout_marginTop="16dp"
-                 app:layout_constraintTop_toBottomOf="@+id/editText" android:layout_marginBottom="16dp"
-                 app:layout_constraintBottom_toTopOf="@+id/button" app:layout_constraintStart_toEndOf="@+id/button"
-                 android:layout_marginStart="8dp" android:layout_marginEnd="32dp"
-                 app:layout_constraintEnd_toEndOf="parent"/>
+                 android:gravity="center"
+                 app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="16dp"
+                 app:layout_constraintBottom_toBottomOf="@+id/textInputLayout"
+                 app:layout_constraintTop_toTopOf="@+id/textInputLayout">
 
-        <com.google.android.material.button.MaterialButton
-                android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:id="@+id/button"
-                android:onClick="@{() -> viewModel.onClickConvertButton()}"
-                android:text="Convert"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="8dp" android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toTopOf="@+id/conversion_result" android:layout_marginTop="32dp"
-                app:layout_constraintTop_toBottomOf="@+id/editText"/>
+        </Spinner>
 
-        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
-                  android:id="@+id/conversion_result"
-                  android:text="@{viewModel.conversionResult}"
-                  android:gravity="center"
-                  app:layout_constraintEnd_toEndOf="parent"
-                  app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
-                  app:layout_constraintHorizontal_bias="0.0" android:layout_marginEnd="8dp"
-                  android:layout_marginBottom="324dp" app:layout_constraintBottom_toBottomOf="parent"/>
+        <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                   android:src="@drawable/ic_arrow_downward_black_48dp"
+                   android:id="@+id/imageView"
+                   app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
+                   app:layout_constraintStart_toStartOf="@+id/textInputLayout"
+                   app:layout_constraintHorizontal_bias="0.493" android:layout_marginTop="32dp"
+                   app:layout_constraintTop_toBottomOf="@+id/textInputLayout"/>
+
+        <Spinner android:layout_width="wrap_content" android:layout_height="wrap_content"
+                 android:id="@+id/from_spiner"
+                 android:entries="@array/temperature_units"
+                 android:selectedItemPosition="@={viewModel.fromUnit}"
+                 android:gravity="center"
+                 app:layout_constraintEnd_toEndOf="@+id/to_spiner"
+                 app:layout_constraintStart_toStartOf="@+id/to_spiner" app:layout_constraintHorizontal_bias="1.0"
+                 app:layout_constraintTop_toTopOf="@+id/textOutputLayout"
+                 app:layout_constraintBottom_toBottomOf="@+id/textOutputLayout">
+
+        </Spinner>
+
+        <com.google.android.material.textfield.TextInputLayout android:layout_width="200dp"
+                                                               android:layout_height="wrap_content"
+                                                               android:id="@+id/textOutputLayout"
+                                                               app:layout_constraintStart_toStartOf="@+id/textInputLayout"
+                                                               app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
+                                                               app:layout_constraintHorizontal_bias="0.0"
+                                                               android:layout_marginTop="32dp"
+                                                               app:layout_constraintTop_toBottomOf="@+id/imageView">
+            <com.google.android.material.textfield.TextInputEditText android:layout_width="match_parent"
+                                                                     android:layout_height="match_parent"
+                                                                     android:text="@={viewModel.conversionResult}"
+                                                                     android:gravity="center_horizontal"
+                                                                     android:inputType="numberSigned|numberDecimal"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
