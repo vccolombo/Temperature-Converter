@@ -1,6 +1,7 @@
-package com.github.vccolombo.temperatureconverter
+package com.github.vccolombo.temperatureconverter.application
 
 import android.app.Application
+import com.github.vccolombo.temperatureconverter.BuildConfig
 import com.github.vccolombo.temperatureconverter.module.repositoryModules
 import com.github.vccolombo.temperatureconverter.module.serviceModules
 import com.github.vccolombo.temperatureconverter.module.viewModelModules

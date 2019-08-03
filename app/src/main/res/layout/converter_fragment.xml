@@ -3,13 +3,13 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
     <data>
-        <variable name="viewModel" type="com.github.vccolombo.temperatureconverter.ui.converter.ConverterViewModel"/>
+        <variable name="viewModel" type="com.github.vccolombo.temperatureconverter.ui.converter.fragment.ConverterViewModel"/>
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/converter"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".ui.converter.ConverterFragment">
+            tools:context=".ui.converter.fragment.ConverterFragment">
 
         <EditText android:layout_width="128dp" android:layout_height="wrap_content"
                   android:layout_marginBottom="148dp"

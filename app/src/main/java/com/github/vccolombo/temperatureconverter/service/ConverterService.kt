@@ -1,4 +1,4 @@
-package com.github.vccolombo.temperatureconverter
+package com.github.vccolombo.temperatureconverter.service
 
 interface ConverterService {
     suspend fun celsiusToKelvin(celsius: Double) : Double

@@ -1,8 +1,9 @@
-package com.github.vccolombo.temperatureconverter
+package com.github.vccolombo.temperatureconverter.ui.converter
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.github.vccolombo.temperatureconverter.ui.converter.ConverterFragment
+import com.github.vccolombo.temperatureconverter.R
+import com.github.vccolombo.temperatureconverter.ui.converter.fragment.ConverterFragment
 
 class ConverterActivity : AppCompatActivity() {
 

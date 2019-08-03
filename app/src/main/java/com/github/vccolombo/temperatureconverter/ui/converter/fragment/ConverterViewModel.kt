@@ -1,8 +1,8 @@
-package com.github.vccolombo.temperatureconverter.ui.converter
+package com.github.vccolombo.temperatureconverter.ui.converter.fragment
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.github.vccolombo.temperatureconverter.ConverterRepository
+import com.github.vccolombo.temperatureconverter.model.ConverterRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -23,6 +23,7 @@ class ConverterViewModel(private val converterRepository: ConverterRepository) :
 
     var conversionResult = MutableLiveData<String>()
 
+    // TODO: Handle errors
     var showError = MutableLiveData<Boolean>()
 
     init {
@@ -57,12 +58,14 @@ class ConverterViewModel(private val converterRepository: ConverterRepository) :
         }
         if (value != null && to != null && from != null) {
             convertTemperature(value, from, to)
+        } else {
+            showError.value = true
         }
     }
 
     private fun convertTemperature(value: Double, from: String, to: String) {
         Timber.d("Convert $value from $from to $to")
-        showError.value = false
+        showError.value = null
         scope.launch {
             val result = converterRepository.convert(value, from, to)
             conversionResult.postValue(result)

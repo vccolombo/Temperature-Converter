@@ -1,10 +1,13 @@
-package com.github.vccolombo.temperatureconverter
+package com.github.vccolombo.temperatureconverter.model
+
+import com.github.vccolombo.temperatureconverter.service.ConverterService
 
 interface ConverterRepository {
     suspend fun convert(value: Double, from: String, to: String): String
 }
 
-class ConverterRepositoryImpl(private val converterService: ConverterService) : ConverterRepository {
+class ConverterRepositoryImpl(private val converterService: ConverterService) :
+    ConverterRepository {
     override suspend fun convert(value: Double, from: String, to: String): String {
         var result: Double = value
         when (from) {
