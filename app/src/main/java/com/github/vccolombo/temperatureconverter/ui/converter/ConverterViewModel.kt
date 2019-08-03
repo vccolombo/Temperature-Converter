@@ -1,11 +1,13 @@
 package com.github.vccolombo.temperatureconverter.ui.converter
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.github.vccolombo.temperatureconverter.ConverterRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import kotlin.coroutines.CoroutineContext
 
 class ConverterViewModel(private val converterRepository: ConverterRepository) : ViewModel() {
@@ -15,9 +17,56 @@ class ConverterViewModel(private val converterRepository: ConverterRepository) :
     private val coroutineContext: CoroutineContext = Dispatchers.Default + job
     private val scope = CoroutineScope(coroutineContext)
 
-    fun convertTemperature(value: String, from: String, to: String) {
+    var fromUnit = MutableLiveData<Int>()
+    var toUnit = MutableLiveData<Int>()
+    var valueToConvert = MutableLiveData<String>()
+
+    var conversionResult = MutableLiveData<String>()
+
+    var showError = MutableLiveData<Boolean>()
+
+    init {
+        fromUnit.value = 1
+        toUnit.value = 2
+    }
+
+    fun onClickConvertButton() {
+        Timber.d("Convert button clicked")
+
+        var from: String? = null
+        var to: String? = null
+
+        // TODO : Find a better way to handle this
+        when (fromUnit.value) {
+            0 -> from = "fahrenheit"
+            1 -> from = "celsius"
+            2 -> from = "kelvin"
+        }
+        when (toUnit.value) {
+            0 -> to = "fahrenheit"
+            1 -> to = "celsius"
+            2 -> to = "kelvin"
+        }
+
+        var value: Double? = null
+        try {
+            value = valueToConvert.value?.toDouble()
+        } catch (ex: Exception) {
+            Timber.e(ex)
+            showError.value = true
+        }
+        if (value != null && to != null && from != null) {
+            convertTemperature(value, from, to)
+        }
+    }
+
+    private fun convertTemperature(value: Double, from: String, to: String) {
+        Timber.d("Convert $value from $from to $to")
+        showError.value = false
         scope.launch {
-            converterRepository.convert(value.toFloat(), from, to)
+            val result = converterRepository.convert(value, from, to)
+            conversionResult.postValue(result)
+            Timber.d(result)
         }
     }
 }

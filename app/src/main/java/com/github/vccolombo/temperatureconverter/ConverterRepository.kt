@@ -1,12 +1,12 @@
 package com.github.vccolombo.temperatureconverter
 
 interface ConverterRepository {
-    suspend fun convert(value: Float, from: String, to: String): String
+    suspend fun convert(value: Double, from: String, to: String): String
 }
 
 class ConverterRepositoryImpl(private val converterService: ConverterService) : ConverterRepository {
-    override suspend fun convert(value: Float, from: String, to: String): String {
-        var result: Float = value
+    override suspend fun convert(value: Double, from: String, to: String): String {
+        var result: Double = value
         when (from) {
             "kelvin" -> {
                 when (to) {
