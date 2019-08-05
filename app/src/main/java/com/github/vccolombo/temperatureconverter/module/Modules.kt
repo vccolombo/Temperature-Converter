@@ -9,14 +9,18 @@ import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val serviceModules = module {
-    factory<ConverterService> { ConverterServiceImpl() }
+    single {
+        @Suppress("USELESS_CAST")
+        ConverterServiceImpl() as ConverterService
+    }
 }
 
 val repositoryModules = module {
-    factory<ConverterRepository> {
+    single {
+        @Suppress("USELESS_CAST")
         ConverterRepositoryImpl(
             converterService = get()
-        )
+        ) as ConverterRepository
     }
 }
 

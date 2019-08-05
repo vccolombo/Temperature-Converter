@@ -9,19 +9,19 @@ interface ConverterService {
 
 class ConverterServiceImpl: ConverterService {
     override suspend fun fahrenheitToKelvin(fahrenheit: Double): Double {
-        return 5.0/9.0 * (fahrenheit - 32) + 273
+        return 5.0/9.0 * (fahrenheit - 32) + 273.15
     }
 
     override suspend fun kelvinToFahrenheit(kelvin: Double): Double {
-        return 9.0/5.0 * (kelvin - 273) + 32
+        return 9.0/5.0 * (kelvin - 273.15) + 32
     }
 
     override suspend fun celsiusToKelvin(celsius: Double): Double {
-        return celsius + 273
+        return celsius + 273.15
     }
 
     override suspend fun kelvinToCelsius(kelvin: Double): Double {
-        return kelvin - 273
+        return kelvin - 273.15
     }
 
 }
